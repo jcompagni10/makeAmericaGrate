@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	    <meta charset="utf-8">
+    	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title> gRate </title>
+		<link href="css/grate.css" rel="stylesheet">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+		<script>
+
+		function initialize(){
+			 falling = false; //cheese
+			 collided = false;  //cheese
+			 score= 0;
+			 multiplier = 1;
+			 mouseX = 50;
+			 cheeseX = 150;
+			 cheeseY = 100;
+			 cheeseSpeed = 20;
+			 autoUpdate = window.setInterval(update,50);
+			 americans = [[-50, 300, 0, document.getElementById("american1")],[-50,300, 0,document.getElementById("american2")],[-50,300, 0,document.getElementById("american3")],[-50,300, 0,document.getElementById("american4")],[-50,300, 0,document.getElementById("coyote")]];
+			 start = false;
+			 numMex = americans.length;
+			 lives = 10;
+			 bonus = [["Bonus Points", bonusPoints], ["Bonus Points", bonusPoints2],[ "Score Multiplier", bonusMultiplier], ["Extra Life", bonusLife],["Time Warp", bonusTime]];
+
+		}
+	
+	
+		function bonusPoints(){
+			score += (5 * multiplier);
+			document.getElementById("score").innerHTML = score;		
+		}
+		
+		function bonusPoints2(){
+			score += (10 * multiplier);
+			document.getElementById("score").innerHTML = score;
+		}
+		function bonusMultiplier(){
+			multiplier = multiplier * 2;
+			window.setTimeout(function (){multiplier = multiplier/2;},8000);
+		}
+		
+		function bonusLife(){
+			lives += 1;
+			$(".life" + lives).html("<img src='img/life.png'>");
+		}
+		
+		function bonusTime(){
+			clearInterval(autoUpdate);
+			autoUpdate = window.setInterval(update,100);
+			window.setTimeout(function (){clearInterval(autoUpdate); autoUpdate = window.setInterval(update,50);},8000);
+		}
+	
+			
+		function showInstructions(){
+			document.getElementById("instructionWindow").style.visibility = "visible";
+		}
+		
+		function toMain(){
+			document.getElementById("instructionWindow").style.visibility = "hidden";
+		}
+
+		function startGame(){
+			window.setTimeout(function (){window.onclick = grate;}, 200);
+			cover.style.visibility = "hidden";
+			window.setTimeout(function (){resetAmerican(0);},1000);
+			window.setTimeout(function (){resetAmerican(1);},2000);
+			window.setTimeout(function (){resetAmerican(2);},3000);
+			window.setTimeout(function (){resetAmerican(3);},8000);
+			window.setTimeout(function (){resetCoyote();},2000);
+			start = true;
+			}
+			
+			
+		function updateMouse(e){
+			if(start){
+				mouseX = e.clientX - document.getElementById("gameWindow").offsetLeft;
+				//document.getElementById("mousePos").innerHTML = mouseX;
+				if(mouseX > 35 && mouseX < 550){
+					document.getElementById("slider").style.left = mouseX - 53 + "px";
+				}
+			}
+		}				
+
+		function hit(target){
+			$(americans[target][3]).addClass("hitAnimation");
+			americans[target][2] = 0;
+			window.setTimeout(function (){resetAmerican(target);},1000);
+			window.setTimeout(function (){resetGrate();},300);
+		}
+		
+		function resetAmerican(m){
+			var initY = Math.floor((Math.random() * 231) + 135); 
+			var speed = Math.floor((Math.random() * 5) + 5);
+			var temp = americans[m][3];
+			americans[m] = [-200, initY, speed, temp];
+			americans[m][3].style.top = americans[m][1] + "px";
+			americans[m][3].style.left = americans[m][0] + "px";
+			americans[m][3].className="american";					
+		}
+		
+		function collision(M){
+			var vert = americans[M][1] - cheeseY;
+			if (-60 < vert && vert < 15){
+				var horiz = americans[M][0] - cheeseX;
+				if(-40 < horiz && horiz < 25){
+					collided = true;
+					cheeseSpeed = 0;
+					return true;
+				}
+			}
+			else{
+				return false
+			}
+		}
+			
+			
+		function update() {
+		//cheese stuff 
+		if (start){
+			//document.getElementById("cheesePosY").innerHTML = cheeseY;	
+			if (falling){			
+				if (cheeseY < 480){
+					cheeseY += cheeseSpeed;
+					cheese.style.top = cheeseY + "px";
+				}
+				else {
+					resetGrate();
+				}
+			}
+			 moveAmerican(0);
+			 moveAmerican(1);
+			 moveAmerican(2);
+			 moveAmerican(3);
+			 moveCoyote();
+
+		}
+		}
+		function resetCoyote(){
+			var initY = Math.floor((Math.random() * 231) + 135); 
+			americans[4] = [800, initY, 0, $("#coyote")[0]];
+			americans[4][3].style.top = americans[4][1] + "px";
+			americans[4][3].style.left = americans[4][0] + "px";
+			americans[4][3].className="coyote";	
+			window.setTimeout(function(){americans[4][2] = 15;}, 5000);
+					
+		}
+			
+		function moveCoyote(){
+			if (americans[4][0] > 0){
+				americans[4][0] -= americans[4][2];
+				americans[4][3].style.left = americans[4][0] + "px";
+				if(!collided && americans[4][2] > 0){
+					if(collision(4)){
+						hit(4);
+						var bonusNum = Math.floor(Math.random() * 5); 
+						if (lives == 10 && bonusNum == 3){
+							bonusNum = 1;
+						}
+						$("#bonusText").html(bonus[bonusNum][0]);
+						$("#bonusText").addClass("flash");
+						window.setTimeout(function (){document.getElementById("bonusText").className= "";},1200);
+						bonus[bonusNum][1]();	
+					}
+				}
+			}
+			else{
+				resetCoyote();
+			}
+		}
+				
+		function moveAmerican(M){
+			if (americans[M][0] < 600){
+				americans[M][0] += americans[M][2]
+				if (americans[M][0] > 425) {
+					$(americans[M][3]).addClass("jump");
+				}
+				americans[M][3].style.left = americans[M][0] + "px";
+				if(!collided && americans[M][2] > 0){
+					if(collision(M)){
+						collided = true;
+						hit(M);
+						score += multiplier;
+						document.getElementById("score").innerHTML = score		
+						$(cheese).addClass("cheeseHit")
+					}	
+				}
+			}
+			else {
+				resetAmerican(M);
+				$(".life" + lives).html("");
+				lives -= 1 ;
+				if (lives < 0){
+					gameOver()
+				}
+				
+				
+			}
+		}
+		
+		function grate() {
+			if (!falling){
+				falling=true;
+				cheeseSpeed = 20;
+				cheeseX = mouseX - 40
+				cheese.style.left = cheeseX + "px";
+				tArms.className="tArms grateAnimation";
+				cheese.className="cheese cheeseVisible";
+
+			}
+		}
+			
+		function resetGrate() {
+			falling=false;
+			collided = false;
+			cheeseSpeed=12;
+			tArms.className="tArms";
+			cheese.className="cheese";
+			cheeseY = 72;
+			cheese.style.top = cheeseY + "px";
+
+
+		}
+		function gameOver(){
+			start = false;
+				if (score < 50){
+					$("#finalText").html("<div class='text1'><p> Oh NO! You let too many Americans escape. <br> America is <b> RUINED! </b></p><p> Your score was: <b>"+score+"</b></p></div>");
+					$(".buyShirt").hide(); $(".playAgain").removeClass("playAgain");
+				}
+				else{
+					$("#finalText").html("<div class='text2'<p> A valiant effort! But America is still screwed.</p> <p>Your score was: <b>"+score+"</b></p><p class='extraSmall'>Celebrate with a T-Shirt! 20% off with this code: <b><u>GREATGRATER</b></u></div>");
+				}
+				$("#gameOver").show();	
+				var file=new File("scores.txt");
+				file.open("w");
+				file.writeln(score);
+				file.close();
+		}
+		
+		</script>
+	</head>
+	<body 	onload="initialize()">
+		<div id="gameWindow" onmousemove="updateMouse(event)">
+		<div id="cover">
+			<div id="start" onClick="startGame()"><u>START!</u></div>
+			<div id="instructions" onClick="showInstructions()"> <u>INSTRUCTIONS</u> </div>
+			<img src="img/logo.png" class="title"> 
+			<img src="img/titleLogo.png" class="titleLogo">
+		</div>
+			<div id="slider">
+				<img src="img/trump.png" id="trump">
+				<img src="img/tArms.png" id="tArms" class="tArms">
+				<img src="img/grater.png" id="grater">
+			</div>
+			<!--<div id="startButton" class ="button" onClick="startGame()"> Start! </div> -->
+			
+			<div id="instructionWindow">
+				<div id="instructionText"> 
+					<p>The year is <b>2017</b>, Donald Trump is President, and America is <span class = "important">FUCKED. </class>
+					<p> Luckily, Trump has <i><span class="important"">GRATE</span></i> plan to save the country. </p>
+					<p><span class="important">Use the mouse to grate cheese on the fleeing Americans.<br>
+					Hit the coyotes for special bonuses.</span</p>
+					<hr>
+				</div>
+				<img src="img/characters.png" class="characters">
+				<div id="backButton" onClick="toMain()">Back </div>					
+			</div>
+			<div id="gameOver">
+				<div id="gameOverText">
+					<img src='img/sadface.png' id='sadface'>
+					<div id="finalText"></div>
+					<div id="bottomOptions"><span class="playAgain"><a href=""> <b>Play Again?</b></a></span><span class="buyShirt"><a href="shop.html"><b>Buy A Shirt?<b></a></span> </div>
+				</div>
+			</div>
+					
+			<img src="img/cheese.png" id="cheese" class="cheese">
+			<img src= "img/american1.png" id="american1" class ="american">
+			<img src= "img/american2.png" id="american2" class ="american">
+			<img src= "img/american3.png" id="american3" class ="american">
+			<img src= "img/american4.png" id="american4" class ="american">
+			<img src = "img/coyote.png" id="coyote" class = "coyote">
+			<table id="lives">
+				<tr>
+					<td class = "life10"><img src="img/life.png"></td><td class = "life9"><img src="img/life.png"></td><td class = "life8"><img src="img/life.png"></td><td class = "life7"><img src="img/life.png"></td><td class = "life6"><img src="img/life.png"></td>
+					<td class = "life5"><img src="img/life.png"></td><td class = "life4"><img src="img/life.png"></td><td class = "life3"><img src="img/life.png"></td><td class = "life2"><img src="img/life.png"></td><td class = "life1"><img src="img/life.png"></td>
+			<div id="bonusText">Double Points</div>
+			<div class="scoreText">Score: <span id="score">0</span></div> 
+		</div>
+		
+		
