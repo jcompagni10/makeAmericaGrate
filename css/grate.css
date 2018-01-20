@@ -1,8 +1,12 @@
 @import 'https://fonts.googleapis.com/css?family=VT323';
 
+p{
+margin: 16px 0px;
+}
+
 #gameWindow{
 	position: relative;
-	margin: 100px auto;
+	margin: 45px auto;
 	height:480px;
 	width: 600px;
 	overflow: hidden;
@@ -14,6 +18,16 @@
 	font-family: 'VT323';
 }
 
+#fbLike{
+margin: -40px auto;
+position: relative;
+width: 600px;
+z-index: 99;
+}
+
+.fb-share-button{
+float: right;
+}
 
 #cover{
 position: absolute;
@@ -22,16 +36,35 @@ top: 0px;
 left: 0px;
 height: 480px;
 width: 600px;
-background-color: #6c0508;
+background-color: #38B0dE;
+}
+
+#start{
+display: inline-block;
+height: 53px;
+color: #fff;
+font-size: 45px;
+font-weight: bold;
+border-bottom: 3px solid #FFF;
+right: 90px;
+position: absolute;
+text-align: center;
+top: 380px;
+z-index: 6;
+cursor: pointer;
+cursor: hand; 
 }
 
 #instructions{
+display: inline-block;
+height: 43px;
+border-bottom: 3px solid #FFF;
 color: #fff;
 font-size: 35px;
 position: absolute;
-left: 85px;
+left: 67px;
 text-align: center;
-top: 388px;
+top: 390px;
 z-index: 6;
 cursor: hand; 
 cursor: pointer;
@@ -53,8 +86,8 @@ position: absolute;
 z-index: 7;
 top: 20px;
 padding: 0px 75px;
-font-size: 20px;
-color: white;
+font-size: 20px !important;
+color: white !important;
 text-align: center;
 }
 
@@ -70,6 +103,8 @@ font-size: 35px;
 color:white;
 top: 430px;
 right: 20px;
+cursor: pointer;
+cursor: hand;
 }
 
 .characters{
@@ -78,7 +113,7 @@ position: absolute;
 top: 295px;
 }
 
-.title{
+.gameTitle{
 position: absolute;
 top: 32px;
 left: 100px;
@@ -89,7 +124,6 @@ left: 100px;
 position: absolute;
 top: 160px;
 left: 205px;
-
 }
 
 #gameOver{
@@ -108,7 +142,7 @@ box-shadow: 5px 5px 4px #222;
 #sadface{
 position: relative;
 top: 5px;
-margin-bottom: -10px;
+margin-bottom: -2px;
 }
 
 #gameOverText{
@@ -124,7 +158,7 @@ line-height: 19px;
 
 .text2{
 line-height: 15px;
-margin-top: 11px;
+margin-top: 11px !important;
 }
 
 .extraSmall{
@@ -150,11 +184,15 @@ text-decoration: underline;
 
 .playAgain{
 float: left;
-margin-left: 80px;
+margin-left: 70px;
+text-align: right;
+margin-right: 10px;
 }
 .buyShirt{
 float:right;
-margin-right: 80px;
+margin-right: 70px;
+text-align: left;
+margin-left: 10px;
 }
 
 #lives{
@@ -203,9 +241,13 @@ z-index: 0;
 
 .jump{
 animation-name: jump;
+-webkit-animation-name: jump;
 animation-duration: .2s;
 animation-iteration-count: 2;
 animation-direction: alternate;
+-webkit-animation-duration: .2s;
+-webkit-animation-iteration-count: 2;
+-webkit-animation-direction: alternate;
 }
 
 @keyframes jump{
@@ -219,6 +261,11 @@ animation-direction: alternate;
    		-o-transform: translate(0,-30px);
     	-ms-transform: translate(0,-30px);
     }
+}
+
+@-webkit-keyframes jump{
+0% { 	-webkit-transform: translate(0,0);}
+100% { 	-webkit-transform: translate(0,-30px);}
 }
 
 
@@ -270,7 +317,9 @@ z-index: 2;
 
 .hitAnimation{
 animation-name: hit;
+-webkit-animation-name: hit;
 animation-duration: 1s;
+-webkit-animation-duration: 1s;
 -webkit-animation-fill-mode: forwards;
 -moz-animation-fill-mode: forwards;
 -o-animation-fill-mode: forwards;
@@ -279,7 +328,6 @@ animation-duration: 1s;
 
 @keyframes hit{
 0% { 	opacity: 1;
-		-webkit-transform: rotate(0deg);
     	-moz-transform: rotate(0deg);
    		-o-transform: rotate(0deg);
     	-ms-transform: rotate(0deg);
@@ -288,18 +336,35 @@ animation-duration: 1s;
     
 100%{
    		 opacity:0;
-    	-webkit-transform: rotate(90deg);
     	-moz-transform: rotate(90deg);
    		-o-transform: rotate(90deg);
     	-ms-transform: rotate(90deg);
 	}
 }
 
+@-webkit-keyframes hit{
+0% { 	opacity: 1;
+		-webkit-transform: rotate(0deg);
+
+    }
+    
+    
+100%{
+   		 opacity:0;
+    	-webkit-transform: rotate(90deg);
+	}
+}
+
 .grateAnimation{
 animation-name: grate;
+-webkit-animation-name: grate;
 animation-duration: .5s;
+-webkit-animation-duration: .5s;
+-webkit-animation-iteration-count: 2;
 animation-iteration-count: 2;
 animation-direction: alternate;
+-webkit-animation-direction: alternate;
+
 }
 
 @keyframes grate{
@@ -315,14 +380,21 @@ animation-direction: alternate;
     }
 }
 
+@-webkit-keyframes grate{
+	0% { 	-webkit-transform: rotate(0deg); }
+	100% { 	-webkit-transform: rotate(-45deg); }
+}
+
 
 #bonusText{
 position: absolute;
+border-bottom: 3px solid red;
+display: inline-block;
+height: 51px;
 top: 180px;
 left: 190px;
 color: red;
 font-size: 42px;
-text-decoration: underline; 
 opacity: 0;
 }
 
@@ -330,9 +402,13 @@ opacity: 0;
 
 .flash{	
 animation-name: flash;
+-webkit-animation-name: flash;
 animation-duration: .2s;
+-webkit-animation-duration: .2s;
 animation-iteration-count: 6;
 animation-direction: alternate;
+-webkit-animation-iteration-count: 6;
+-webkit-animation-direction: alternate;
 visibility: visible;
 }
 
@@ -341,19 +417,13 @@ visibility: visible;
 50%{opacity: 1;}
 100%{opacity: 0;}
 }
-
-
-#start{
-color: #fff;
-font-size: 45px;
-font-weight: bold;
-right: 110px;
-position: absolute;
-text-align: center;
-top: 380px;
-z-index: 6;
-cursor: pointer;
-cursor: hand; 
+@-webkit-keyframes flash{
+0%{opacity: 0;}
+50%{opacity: 1;}
+100%{opacity: 0;}
 }
+
+
+
 
     

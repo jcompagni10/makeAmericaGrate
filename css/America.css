@@ -1,0 +1,538 @@
+/*!
+ * Start Bootstrap - Business Casual Bootstrap Theme (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+
+
+@font-face {
+    font-family: "old";
+    src: url('../fonts/OldStandard-Regular.ttf');
+}
+
+body {
+    font-family: "Montserrat",sans-serif;
+    background: url('../img/flag.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "Montserrat",sans-serif;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+
+.smallText{
+font-size: 1em;
+font-weight: normal; 
+}
+
+
+.container{
+width: 100%;
+
+}
+
+.logo{
+	display: inline;
+	height: auto;
+	width: 100%;
+	max-width: 360px;	
+}
+	
+/**p {
+    font-size: 1.25em;
+    line-height: 1.6;
+    color: #000;
+} **/
+
+a, a:active, a:focus {
+outline: none;
+}
+
+hr {
+    max-width: 400px;
+    border-color: #999999;
+}
+
+
+
+.top-bar{
+	background-color: #2b335e;
+    display: block;
+    height: 40px;
+}
+
+.navbar-brand {
+    width: 75%;
+    max-width: 380px;
+
+}
+
+
+
+.navbar-collapse {
+padding-right: 0;
+}
+
+.navbar-default{
+	background-color: #820408;
+	color: #FFF;
+	height: 90px;
+	}
+	
+.smLogo{
+	width: 100%;
+	height: auto;
+	margin-bottom: 10px;
+}	
+	
+.navbar-nav {
+    text-transform: uppercase;
+    font-weight: 900;
+    letter-spacing: 3px;
+}
+
+
+.navbar-default .navbar-brand {
+color: #FFF;
+
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+background-color: #fff;
+}
+
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus{
+background-color: transparent;
+}
+
+.navbar-toggle{
+margin-bottom: 0px;
+margin-right: 0px;
+margin-top: 0px;
+top: 27px;
+right: 14px;
+}
+
+.img-full {
+    min-width: 100%;
+}
+
+.brand-before,
+.brand-name {
+    text-transform: capitalize;
+}
+
+.brand-before {
+    margin: 15px 0;
+}
+
+.brand-name {
+    margin: 0;
+    font-size: 3em;
+}
+
+.tagline-divider {
+    margin: 15px auto 3px;
+    max-width: 250px;
+    border-color: #999999;
+}
+
+.box {
+    margin-bottom: 20px;
+    padding: 30px 15px;
+    background: #fff;
+    background: rgba(255,255,255,0.9);
+}
+
+.intro-text {
+    text-transform: uppercase;
+    font-size: 1.25em;
+    font-weight: 400;
+    letter-spacing: 1px;
+}
+
+.img-border {
+    float: none;
+    margin: 0 auto 0;
+    border: #999999 solid 1px;
+}
+
+.img-left {
+    float: none;
+    margin: 0 auto 0;
+}
+.img-center {
+	float: none;
+	margin: auto;
+}
+
+.item{
+height: 351px;
+background-color: #FFF;
+width: 200px;
+float: none;
+margin: 0 auto;
+margin-bottom: 30px;
+}
+
+.focus{
+margin-top: 0px;
+}
+
+footer {
+    background: rgba(256,256,256,0);
+}
+
+footer p {
+	font-size: .9em;
+	color: #fff;
+    margin: 0;
+    padding: 2px 0;
+}
+
+.email{
+color: white;
+}
+
+
+
+a.email:active{
+text-decoration: none;
+color: white;
+}
+
+a.email:visited{
+text-decoration: none;
+color: white;
+}
+
+.spacer{
+height: 80px;
+width: 100%;
+}
+
+.sm-spacer{
+height: 38px;
+width: 100%;
+}
+
+a{
+text-decoration: none;
+}
+
+.text-box{
+	margin-top: 85px;
+	position: relative;
+	padding: 15px 20px 40px 20px;
+	background-image: url("../img/border.png");
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 95% 89%;
+    overflow: visible;
+    font-family: Mont;
+    font-size: 3.5vw;
+    letter-spacing: 0.35vw;
+    line-height: 4vw;
+    color: #FFF;
+    text-align: center;
+	text-transform: uppercase;
+	text-shadow: 1px 1px 2px #000
+}
+
+    
+a:hover, .a:active{
+text-decoration: none !important;
+}
+
+.text-box:hover{
+color: #BBB;
+}
+
+.america{
+font-family: old;
+white-space: nowrap;
+}
+
+.game-text{
+	font-size: .5em;
+}
+
+.shirt{
+	width: 110%;
+	height: auto;
+	margin: 0 auto;
+	max-width: 500px;
+	}	
+	
+.shirt-box{
+	text-align: center;
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	margin: 175px 0px 45px 0px;
+	}
+
+.img-zoom {
+    -webkit-transition: all .1s ease-in-out;
+    -moz-transition: all .1s ease-in-out;
+    -o-transition: all .1s ease-in-out;
+    -ms-transition: all .1s ease-in-out;
+}
+
+.img-zoom:hover {
+    -webkit-transform: scale(1.2) rotate(-10deg); 
+    -moz-transform: scale(1.2) rotate(-10deg);
+    -o-transform: scale(1.2) rotate(-10deg);
+    transform: scale(1.2) rotate(-10deg);
+}
+
+/** mobile Game **/
+
+.mobileGame{
+	font-family: old;
+	font-size: 1em;
+	font-weight: bold;
+	text-align: center;
+	color: #FFF;
+	text-shadow: 1px 1px 1px #000;
+}
+
+.mobileLogo{
+	display: inline;
+}
+
+
+/** Shop STUFF**/
+.shopItem{
+	margin: 30px auto;
+	height: 350px;
+	width: 230px;
+	background-color: #FFF;
+	position: relative;
+	box-shadow: 2px 2px 2px #333;
+	border-radius:  0px 0px 8px 8px;
+}
+
+.itemPicture{
+	position: relative;
+	z-index: 1;
+}
+.fullPicture{
+	cursor: -moz-zoom-in; 
+	cursor: -webkit-zoom-in; 
+	cursor: zoom-in;
+	position: absolute;
+	display: none;
+	z-index: 2;
+	top: -30px;
+	left: -40px;
+	box-shadow: 3px 3px 3px #000;
+}
+.itemName{
+	text-align: center;
+	font-size: 20px;
+	margin-top: 25px;
+	margin-bottom: 0px;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-weight: bold;
+	color: black;
+	text-shadow: 1px 1px 2px #CCC;
+}
+.itemPrice{	color: red;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-size: 21px;
+	left: 134px;
+	position: relative;
+	top: 10px;
+	width: 90px;
+	line-height: 22px;
+}
+.hoverToZoom{
+position: absolute;
+z-index: 1;
+top: 188px;
+font-size:10px;
+text-align: center;
+width: 100%;
+}
+
+.oldPrice{
+color: #AAA;
+font-size:15px;
+text-decoration: line-through;
+line-height: 10px;
+}
+
+.buyButton{
+	margin-top: -24px;
+	width: 200px;
+	margin-left: 30px;
+}
+
+.blueButton{
+background-color: #2b335e;
+color: #FFF;
+padding: 3px 4px 2px 4px;
+border: 1px #2b335e;
+border-radius: 4px;
+box-shadow: 2px 2px 2px #999;
+}
+
+
+select:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 #000;
+}
+
+
+#teeSpring{
+width: 250px;
+margin: 25px auto;
+color: white;
+text-shadow: 1px 1px 1px #000;
+font-size: 15px;
+text-align: center;
+}
+
+@media screen and (min-width:768px) {
+    .brand {
+    	font-size: 2.5em;
+    	float: left;
+    	width: 35%;
+    	height:100%;
+    	padding: 12px 0px 0px 0px;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        font-weight: 700;
+        line-height: normal;
+    }
+
+    .top-divider {
+        margin-top: 0;
+    }
+
+    .img-left {
+        float: left;
+        margin-right: 25px;
+    }
+
+    .address-bar {
+        display: inherit;
+        margin: 0;
+        padding: 0 0 40px;
+        text-align: center;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        font-size: 1.25em;
+        font-weight: 400;
+        letter-spacing: 3px;
+        color: #fff;
+    }
+
+    .navbar {
+        border-radius: 0;
+    }
+
+    .navbar-header {
+        display: none;
+        background-color: #820408;
+    }
+
+    .navbar {
+        min-height: 0;
+    }
+
+    .navbar-default {
+		background-color: #820408;
+		border-width: 3px 0px;
+		border-style: solid;
+		border-color: #FFF;
+		height: 120px;
+
+    }
+
+    .nav>li>a {
+        padding: 55px 25px 0px 25px;
+        font-size: 1em;
+    	border-left: 2px solid #6c0508;
+    	display: inline-block;
+    	float: left;
+    	height: 114px;
+    	text-align: center;
+   		width: 18%;
+   		color: #FFF;
+    }
+	.navbar-default .navbar-nav > li > a {
+	color: #FFF;
+	}
+	
+	.navbar-default .navbar-nav > li > a:hover {
+		color: #FFF;
+	}
+	
+	.navbar-default .navbar-nav > li > a:visited {
+		color: #FFF;
+	}
+
+    .navbar-nav>li>a {
+    	color: #FFF;
+        line-height: normal;
+    }
+
+    .navbar-nav {
+        display: table;
+        float: right;
+		margin: 0px 20px 0px 0px;
+        table-layout: fixed;
+        font-size: 1.2em;
+        letter-spacing:1px;
+    }
+}
+
+@media screen and (min-width:1200px) {
+    .box:after {
+        content: '';
+        display: table;
+        clear: both;
+    }
+}
+@media (max-width: 768px) {
+    .text-box {
+    	padding-top: 20px;
+        font-size: 7vw;
+        margin-bottom: 100px;
+    } 
+    .navbar-brand {
+		width: 70%;
+		max-width: 380px;
+	}
+	.shirt-box{
+		margin: 35px 0px 0px
+	}
+	.navbar-collapse{
+	right: 5px;
+	margin-top: 46px;
+	width: 200px;
+	position: absolute;
+	z-index: 99;
+	background-color: #2b335e;
+	overflow: hidden;
+	box-shadow: -2px 2px 2px #000;
+	border: none;
+	}
+
+	.nav > li {
+	border-bottom: 1px solid #777;
+	}
+	.navbar-nav{
+	margin: 0 -15px;
+}

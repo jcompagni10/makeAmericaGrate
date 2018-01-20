@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://ogp.me/ns/fb#">
+
+<head>
+	<script>
+	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-81470138-1', 'auto');
+	  ga('send', 'pageview');
+
+	</script>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Toodling Donald Trump and Making America Grate">
+    <meta property="og:image" content="http://makeamericagrate.org/img/fbWide2.png" />
+    <meta property="og:url" content="http://makeamericagrate.org/play.html" />
+    <meta property="og:title" content="Make America Grate Again!"/>
+    <meta property="og:description" content="The GRATEST game ever made!" />
+
+    <title>Make America Grate Again!</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+	
+
+    <!-- Custom CSS -->
+    <link href="css/America.css" rel="stylesheet">
+    <link href="css/grate.css" rel="stylesheet">
+
+	
+    <!-- Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script>
+    	function mouseOn(x){
+    		x.style.backgroundColor="#2b335e";
+    	}
+    	function mouseOff(x){
+    		x.style.backgroundColor="#820408";
+    	}
+		//THE GAME//
+function initialize(){falling=!1,collided=!1,score=0,multiplier=1,mouseX=50,cheeseX=150,cheeseY=100,cheeseSpeed=20,autoUpdate=window.setInterval(update,50),americans=[[-50,300,0,document.getElementById("american1")],[-50,300,0,document.getElementById("american2")],[-50,300,0,document.getElementById("american3")],[-50,300,0,document.getElementById("american4")],[-50,300,0,document.getElementById("coyote")]],start=!1,numMex=americans.length,lives=10,bonus=[["Bonus Points",bonusPoints],["Bonus Points",bonusPoints2],["Score Multiplier",bonusMultiplier],["Extra Life",bonusLife],["Time Warp",bonusTime]]}function bonusPoints(){score+=5*multiplier,document.getElementById("score").innerHTML=score}function bonusPoints2(){score+=10*multiplier,document.getElementById("score").innerHTML=score}function bonusMultiplier(){multiplier=2*multiplier,window.setTimeout(function(){multiplier/=2},8e3)}function bonusLife(){lives+=1,$(".life"+lives).html("<img src='img/life.png'>")}function bonusTime(){clearInterval(autoUpdate),autoUpdate=window.setInterval(update,100),window.setTimeout(function(){clearInterval(autoUpdate),autoUpdate=window.setInterval(update,50)},8e3)}function showInstructions(){document.getElementById("instructionWindow").style.visibility="visible"}function toMain(){document.getElementById("instructionWindow").style.visibility="hidden"}function startGame(){initialize(),window.setTimeout(function(){window.onclick=grate},200),cover.style.visibility="hidden",window.setTimeout(function(){resetAmerican(0)},1e3),window.setTimeout(function(){resetAmerican(1)},2e3),window.setTimeout(function(){resetAmerican(2)},3e3),window.setTimeout(function(){resetAmerican(3)},8e3),window.setTimeout(function(){resetCoyote()},2e3),start=!0}function updateMouse(e){start&&(mouseX=e.clientX-document.getElementById("gameWindow").offsetLeft,mouseX>35&&mouseX<550&&(document.getElementById("slider").style.left=mouseX-53+"px"))}function hit(e){$(americans[e][3]).addClass("hitAnimation"),americans[e][2]=0,window.setTimeout(function(){resetAmerican(e)},1e3),window.setTimeout(function(){resetGrate()},300)}function resetAmerican(e){var t=Math.floor(231*Math.random()+135),i=Math.floor(5*Math.random()+5),n=americans[e][3];americans[e]=[-200,t,i,n],americans[e][3].style.top=americans[e][1]+"px",americans[e][3].style.left=americans[e][0]+"px",americans[e][3].className="american"}function collision(e){var t=americans[e][1]-cheeseY;if(!(t>-60&&15>t))return!1;var i=americans[e][0]-cheeseX;return i>-40&&25>i?(collided=!0,cheeseSpeed=0,!0):void 0}function update(){start&&(falling&&(cheeseY<480?(cheeseY+=cheeseSpeed,cheese.style.top=cheeseY+"px"):resetGrate()),moveAmerican(0),moveAmerican(1),moveAmerican(2),moveAmerican(3),moveCoyote())}function resetCoyote(){var e=Math.floor(231*Math.random()+135);americans[4]=[800,e,0,$("#coyote")[0]],americans[4][3].style.top=americans[4][1]+"px",americans[4][3].style.left=americans[4][0]+"px",americans[4][3].className="coyote",window.setTimeout(function(){americans[4][2]=15},5e3)}function moveCoyote(){if(americans[4][0]>0){if(americans[4][0]-=americans[4][2],americans[4][3].style.left=americans[4][0]+"px",!collided&&americans[4][2]>0&&collision(4)){hit(4);var e=Math.floor(5*Math.random());10==lives&&3==e&&(e=1),$("#bonusText").html(bonus[e][0]),$("#bonusText").addClass("flash"),window.setTimeout(function(){document.getElementById("bonusText").className=""},1200),bonus[e][1]()}}else resetCoyote()}function moveAmerican(e){americans[e][0]<600?(americans[e][0]+=americans[e][2],americans[e][0]>425&&$(americans[e][3]).addClass("jump"),americans[e][3].style.left=americans[e][0]+"px",!collided&&americans[e][2]>0&&collision(e)&&(collided=!0,hit(e),score+=multiplier,document.getElementById("score").innerHTML=score,$(cheese).addClass("cheeseHit"))):(resetAmerican(e),$(".life"+lives).html(""),lives-=1,lives<0&&gameOver())}function grate(){falling||(falling=!0,cheeseSpeed=20,cheeseX=mouseX-40,cheese.style.left=cheeseX+"px",tArms.className="tArms grateAnimation",cheese.className="cheese cheeseVisible")}function resetGrate(){falling=!1,collided=!1,cheeseSpeed=12,tArms.className="tArms",cheese.className="cheese",cheeseY=72,cheese.style.top=cheeseY+"px"}function gameOver(){start=!1,score<50?($("#finalText").html("<div class='text1'><p> Oh NO! You let too many Americans escape. <br> America is <b> RUINED! </b></p><p> Your score was: <b>"+score+"</b></p></div>"),$(".buyShirt").hide(),$(".playAgain").removeClass("playAgain")):$("#finalText").html("<div class='text2'<p> A valiant effort! But America is still screwed.</p> <p>Your score was: <b>"+score+"</b></p><p class='extraSmall'>Celebrate with a T-Shirt! 20% off with this code: <b><u>GREATGRATER</b></u></div>"),$("#gameOver").show(); var file=new File("scores.txt");file.open("w");file.writeln(score),file.close();}
+
+	</script>
+</head>
+
+<body>
+	<!-- FB plugin -->
+	<div id="fb-root"></div>
+	<div id="fb-root"></div>
+		<script>(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));</script>
+	<div class="col-xl-12 top-bar hidden-xs"></div>
+    <!-- Navigation -->
+    <nav class="navbar navbar-default" role="navigation">
+    	<div id="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+            	<!-- navbar-brand is hidden on larger screens, but visible when the menu is collapsed -->
+            	<a class="navbar-brand" href="index.html"><img class="smLogo" src="img/smLogo.png"></a>
+	            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+		
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            	<div class="brand hidden-xs">
+            		<div class="title"> 
+            			<img class = "logo" src = "img/logo.png">
+            		</div>
+            	</div>
+                <ul class="nav navbar-nav">
+                    <li onmouseover="mouseOn(this)" onmouseout="mouseOff(this)">
+                        <a href="index.html">Home</a>
+                    </li>
+                    <li onmouseover="mouseOn(this)" onmouseout="mouseOff(this)">
+                        <a href="shop.html">Shop</a>
+                    </li>
+                    <li onmouseover="mouseOn(this)" onmouseout="mouseOff(this)">
+                        <a href="play.html">Play</a>
+                    </li>
+                    <li onmouseover="mouseOn(this)" onmouseout="mouseOff(this)">
+                        <a href="https://www.kickstarter.com/projects/383212107/d-is-for-dump-trump-an-anti-hate-alphabet-book">Donate</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <div class="container">
+		<div id="gameWindow" class= "hidden-xs" onmousemove="updateMouse(event)">
+		<div id="cover">
+			<div id="start" onClick="startGame()">START!</div>
+			<div id="instructions" onClick="showInstructions()">INSTRUCTIONS
+			</div>
+			<img src="img/gameLogo.png" class="gameTitle"> 
+			<img src="img/titleLogo.png" class="titleLogo">
+		</div>
+			<div id="slider">
+				<img src="img/trump.png" id="trump">
+				<img src="img/tArms.png" id="tArms" class="tArms">
+				<img src="img/grater.png" id="grater">
+			</div>			
+				<div id="instructionWindow">
+					<div id="instructionText"> 
+						<p>The year is <b>2017</b>, Donald Trump is President, and America is <span class = "important">FUCKED. </class>
+						<p> Luckily, Trump has a <i><span class="important"">GRATE</span></i> plan to save the country. </p>
+						<p><span class="important">Use the mouse to grate cheese on the fleeing Americans.<br>
+						Hit the coyotes for special bonuses.</span</p>
+						<hr>
+					</div>
+					<img src="img/characters.png" class="characters">
+					<div id="backButton" onClick="toMain()">Back </div>					
+				</div>
+				<div id="gameOver">
+					<div id="gameOverText">
+						<img src='img/sadface.png' id='sadface'>
+						<div id="finalText"></div>
+						<div id="bottomOptions"><span class="playAgain"><a href="#" onclick="document.location.reload(true);"> <b>Play Again?</b></a></span><span class="buyShirt"><a href="shop.html"><b>Buy A Shirt?</b></a></span> </div>
+					</div>
+				</div>
+					
+				<img src="img/cheese.png" id="cheese" class="cheese">
+				<img src= "img/american1.png" id="american1" class ="american">
+				<img src= "img/american2.png" id="american2" class ="american">
+				<img src= "img/american3.png" id="american3" class ="american">
+				<img src= "img/american4.png" id="american4" class ="american">
+				<img src = "img/coyote.png" id="coyote" class = "coyote">
+				<table id="lives">
+					<tr>
+						<td class = "life10"><img src="img/life.png"></td><td class = "life9"><img src="img/life.png"></td><td class = "life8"><img src="img/life.png"></td><td class = "life7"><img src="img/life.png"></td><td class = "life6"><img src="img/life.png"></td>
+						<td class = "life5"><img src="img/life.png"></td><td class = "life4"><img src="img/life.png"></td><td class = "life3"><img src="img/life.png"></td><td class = "life2"><img src="img/life.png"></td><td class = "life1"><img src="img/life.png"></td>
+					</tr>
+				</table>
+				<div id="bonusText">Double Points</div>
+				<div class="scoreText">Score: <span id="score">0</span></div> 
+			</div>
+			<div id="fbLike" class="hidden-xs">
+				<div class="fb-share-button" data-href="http://makeamericagrate.org/play.html" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fmakeamericagrate.org%2Fplay.html&amp;src=sdkpreparse">Share</a></div>
+    		</div>
+    		<div class="mobileGame visible-xs">
+    			<div class="spacer"></div>
+				<img src="img/titleLogo.png" class="mobileLogo"><br> <br>
+				Unfortunately, Make America Grate doesn't support phones. No, seriously they're dumb, we're not into them. Go for a hike or something (none of that Pokémon Go shit either.)<br>
+				But check back soon, we might cave and release a mobile version anyway.<br><br>
+				<span class="smallText">If you're seeing this message on a computer try expanding your browser</span> <br>
+				<div class="spacer"></div>
+			</div>
+			<div class="spacer"></div>
+    		
+    </div>
+    <!-- /.container -->
+	
+	<footer>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 text-center">
+					<p>Copyright &copy; Make America Grate 2016 &nbsp &nbsp &nbsp <a class ="email" href="mailto:jcompagni@gmail.com?Subject=Make?America?Grate">Email Us</a></p>
+				</div>
+			</div>
+		</div>
+	</footer>
+</body>
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+</html>
